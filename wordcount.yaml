@@ -32,7 +32,7 @@ spec:
             - name: wordcount-container
               image: slldocker/my-wordcount-app:latest
               imagePullPolicy: IfNotPresent
-              command: ["python", "main.py"]
+              command: ["/bin/bash", "-c", "python main.py"]
               resources:
                 limits:
                   cpu: "0.25"
