@@ -28,6 +28,7 @@ spec:
       name: "wordcount-task"
       template:
         spec:
+          schedulerName: volcano
           containers:
             - name: wordcount-container
               image: slldocker/my-wordcount-app:latest
