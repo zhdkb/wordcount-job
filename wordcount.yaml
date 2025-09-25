@@ -22,7 +22,7 @@ spec:
     env: []
     svc: []
   maxRetry: 3
-  queue: wordcount-queue
+  queue: test
   tasks:
     - replicas: 1
       name: "wordcount-task"
