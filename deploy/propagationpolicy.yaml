@@ -11,5 +11,3 @@ spec:
     clusterAffinity:
       clusterNames:
         - kubernetes-dc1
-        - kubernetes-dc2
-        - kubernetes-dc3
