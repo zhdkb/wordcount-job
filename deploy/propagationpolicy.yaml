@@ -1,13 +1,15 @@
 apiVersion: policy.karmada.io/v1alpha1
-kind: PropagationPolicy
+kind: ClusterPropagationPolicy
 metadata:
-  name: wordcount-job
+  name: wordcount-job-cpp
 spec:
   resourceSelectors:
     - apiVersion: batch.volcano.sh/v1alpha1
       kind: Job
       name: wordcount-job
   placement:
-    replicaScheduling:
-      replicaDivisionPreference: Aggregated
-      replicaSchedulingType: Divided
+    clusterAffinity:
+      clusterNames:
+        - kubernetes-dc1
+        - kubernetes-dc2
+        - kubernetes-dc3
