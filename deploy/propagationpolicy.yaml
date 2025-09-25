@@ -11,3 +11,6 @@ spec:
     clusterAffinity:
       clusterNames:
         - kubernetes-dc1
+  overrides:
+    - path: "/spec/schedulerName"
+      value: "volcano"
