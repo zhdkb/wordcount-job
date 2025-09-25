@@ -1,0 +1,41 @@
+apiVersion: scheduling.volcano.sh/v1beta1
+kind: Queue
+metadata:
+  name: wordcount-queue
+spec:
+  reclaimable: true
+  weight: 1
+
+---
+apiVersion: batch.volcano.sh/v1alpha1
+kind: Job
+metadata:
+  name: wordcount-job
+spec:
+  minAvailable: 1
+  schedulerName: volcano
+  policies:
+    - event: PodEvicted
+      action: RestartJob
+  plugins:
+    ssh: []
+    env: []
+    svc: []
+  maxRetry: 3
+  queue: wordcount-queue
+  tasks:
+    - replicas: 1
+      name: "wordcount-task"
+      template:
+        spec:
+          containers:
+            - name: wordcount-container
+              image: slldocker/my-wordcount-app:latest
+              imagePullPolicy: IfNotPresent
+              command: ["python", "main.py"]
+              resources:
+                limits:
+                  cpu: "0.25"
+                requests:
+                  cpu: "0.25"
+          restartPolicy: OnFailure
